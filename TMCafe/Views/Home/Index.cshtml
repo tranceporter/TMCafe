@@ -1,75 +1,405 @@
-﻿<style>
-    .menu {
-        background-color: #222;
-    }
-     .menu-header {
-         font-family: 'Fjalla One', sans-serif;
-         font-size: 72px;
-         font-weight: bold;
-         color: #fffded;
-         text-align: center;
-     }
+﻿@{
+    Layout = null;
+}
 
-    .menu-sub-header {
-        font-family: 'Fjalla One', sans-serif;
-        font-size: 48px;
-        color: #fffded;
-        text-align: center;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TM Cafe</title>
 
-    .menu-item {
-        text-align: center;
-        color: #fffded;
-        font-family: 'Fjalla One', sans-serif;
-        font-size: 24px;
-        line-height: 1.6;
-        border-top: 2px solid #6498ae;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-</style>
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<div class="container" style="width: 960px;">
-    <div class="row">
-        <div class="col-md-12">
-            <img class="img-responsive" src="~/Content/Images/food-morning-breakfast-croissant.jpg" />
-        </div>
-    </div>
-    <div class="menu">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .nopadding {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .menu {
+            background-color: #222;
+        }
+
+        .order {
+            background-color: #fffded;
+            padding-top:15px;
+        }
+
+        .order-item{
+            color: #222;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 24px;
+            line-height: 1.6;
+            /*width: 95%;
+            border-top: 2px solid #6498ae;*/
+            margin-left: 15px;
+            margin-right: 15px;
+            padding-top:15px;
+            padding-bottom: 15px;
+        }
+
+        .order-item-button{
+            color: #222;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 24px;
+            /*width: 95%;
+            border-top: 2px solid #6498ae;*/
+            margin: 15px;
+        }
+
+        .order-description{
+            color: #222;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.6;
+            padding-top: 5px;
+            padding-bottom: 15px;
+        }
+
+        .menu-header {
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 72px;
+            font-weight: bold;
+            color: #fffded;
+            text-align: center;
+        }
+
+        .menu-sub-header {
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 48px;
+            color: #fffded;
+            text-align: center;
+        }
+
+        .menu-item {
+            text-align: center;
+            color: #fffded;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 24px;
+            line-height: 1.6;
+            width: 95%;
+            border-top: 2px solid #6498ae;
+            margin-left: 15px;
+            margin-right: 15px;
+            padding-top:15px;
+            padding-bottom: 15px;
+        }
+
+        .menu-checkbox {
+            margin-top: 10px !important;
+            margin-right: 15px !important;
+            height: 22px;
+            width: 22px;
+        }
+
+        .menu-item-with-description {
+            text-align: center;
+            color: #fffded;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 24px;
+            line-height: 1.6;
+            width: 95%;
+            border-top: 2px solid #6498ae;
+            margin-left: 15px;
+            margin-right: 15px;
+            padding-top:15px;
+            padding-bottom: 5px;
+        }
+
+        .menu-desciption {
+            color: #fffded;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.6;
+            width: 95%;
+            margin-left: 15px;
+            margin-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 15px;
+        }
+
+        .addButton{
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        .quantity{
+             margin-top: 5px;
+             margin-left: 10px;
+             height: 30px;
+             width: 40px;
+             color: #222;
+             font-family: 'Fjalla One', sans-serif;
+             font-size: 18px;
+             text-align: center;
+        }
+
+    </style>
+
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 menu-header">
+            <img class="img-responsive" src="../../Content/Images/food-morning-breakfast-croissant.jpg" />
+        </div>
+        <div class="row menu">
+            <div class="col-md-12 menu-header nopadding">
                 MENU
             </div>
+            
         </div>
-        <div class="row">
+        <div class="row menu">
             <div class="col-md-6 col-xs-12">
                 <div class="row">
-                    <div class="col-md-12 menu-sub-header">
+                    <div class="col-md-12 menu-sub-header nopadding">
                         Breads
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 menu-item">
+                    <div class="col-md-12 menu-item-with-description">
                         <span class="pull-left">Bap</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Bap" data-bread-value="2.20" value="Add" />
                         <span class="pull-right">£2.20</span>
                     </div>
+                </div>
+                <div class="row menu-desciption">
+                    One filling included
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item-with-description">
+                        <span class="pull-left">Sandwich</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Sandwich" data-bread-value="2.70" value="Add" />
+                        <span class="pull-right">£2.70</span>
+                    </div>
+                </div>
+                <div class="row menu-desciption">
+                    One filling included
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item-with-description">
+                        <span class="pull-left">Bagel</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Bagel" data-bread-value="2.70" value="Add" />
+                        <span class="pull-right">£2.70</span>
+                    </div>
+                </div>
+                <div class="row menu-desciption">
+                    One filling included
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item-with-description">
+                        <span class="pull-left">Baguette</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Baguette" data-bread-value="2.70" value="Add" />
+                        <span class="pull-right">£2.70</span>
+                    </div>
+                </div>
+                <div class="row menu-desciption">
+                    One filling included
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item-with-description">
+                        <span class="pull-left">Wrap</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Wrap" data-bread-value="2.70" value="Add" />
+                        <span class="pull-right">£2.70</span>
+                    </div>
+                </div>
+                <div class="row menu-desciption">
+                    One filling included
                 </div>
             </div>
             <div class="col-md-6 col-xs-12">
                 <div class="row">
-                    <div class="col-md-12 menu-sub-header">
+                    <div class="col-md-12 menu-sub-header nopadding">
                         Fillings
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 menu-item">
                         <span class="pull-left">Bacon</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right filling addButton" data-filling-type="Bacon" data-filling-value="0.50" value="Add" />
+                        @*<input type="number" min="1" max="5" value="1" class="pull-right quantity" />*@
+                        <span class="pull-right">£0.50</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <span class="pull-left">Sausage</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right filling addButton" data-filling-type="Sausage" data-filling-value="0.50" value="Add" />
+                        @* <input type="number" min="1" max="5" value="1" class="pull-right quantity" />*@
+                        <span class="pull-right">£0.50</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <span class="pull-left">Egg</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right filling addButton" data-filling-type="Egg" data-filling-value="0.50" value="Add" />
+                        @* <input type="number" min="1" max="5" value="1" class="pull-right quantity" />*@
+                        <span class="pull-right">£0.50</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <span class="pull-left">Mushroom</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right filling addButton" data-filling-type="Mushroom" data-filling-value="0.50" value="Add" />
+                        @* <input type="number" min="1" max="5" value="1" class="pull-right quantity" />*@
                         <span class="pull-right">£0.50</span>
                     </div>
                 </div>
             </div>
-           
+        </div>
+        <div class="row menu">
+            <div class="col-md-6 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 menu-sub-header nopadding">
+                        Specials
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item-with-description">
+                        <span class="pull-left">Breakfast Bap</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Breakfast Bap" data-bread-value="3.20" value="Add" />
+                        <span class="pull-right">£3.20</span>
+                    </div>
+                </div>
+                <div class="row menu-desciption">
+                    2 Bacon, 2 Sausage, 1 Egg
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item-with-description">
+                        <span class="pull-left">Breakfast Baguette</span>
+                        <input type="button" class="btn btn-sm btn-success pull-right bread addButton" data-bread-type="Breakfast Baguette" data-bread-value="4.20" value="Add" />
+                        <span class="pull-right">£4.20</span>
+                    </div>
+                </div>
+                <div class="row menu-desciption">
+                    2 Bacon, 3 Sausage, 2 Eggs
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 menu-sub-header nopadding">
+                        Extras
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Tomato Sauce" />
+                        <span class="pull-left">Tomato Sauce</span>
+                        <span class="pull-right">£0.00</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Brown Sauce" />
+                        <span class="pull-left">Brown Sauce</span>
+                        <span class="pull-right">£0.00</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Salt" />
+                        <span class="pull-left">Salt</span>
+                        <span class="pull-right">£0.00</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Black Pepper" />
+                        <span class="pull-left">Black Pepper</span>
+                        <span class="pull-right">£0.00</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 menu-item">
+                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="No Spread" />
+                        <span class="pull-left">No Spread</span>
+                        <span class="pull-right">£0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row order">
+            <div class="col-md-12">
+                <div class="row">
+                    <span class="order-item">Breads: </span>
+                    <span class="order-description" id="breads"></span>
+                </div>
+                <div class="row">
+                    <span class="order-item">Fillings: </span>
+                    <span class="order-description" id="fillings"></span>
+                </div>
+                <div class="row">
+                    <span class="order-item">Total: </span>
+                    <span class="order-description" id="total"></span>
+                </div>
+                <div class="row">
+                    <input type="button" id="placeOrder" class="btn btn-sm btn-success order-item-button" value="Place Order" />
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var breadCount = 0;
+            var fillingCount = 0;
+            var total = 0;
+            var breadDiv = $('#breads');
+            var fillingDiv = $('#fillings');
+            var totalSpan = $('#total');
+
+            $('.filling').hide();
+
+            $('.bread').click(function () {
+                breadCount++;
+                var breadType = $(this).attr('data-bread-type');
+                var breadName = breadCount === 1 ? breadType : ', ' + breadType;
+                breadDiv.append(breadName);
+                $('.filling').show();
+                $('.bread').hide();
+
+                var value = $(this).attr('data-bread-value');
+                if (value) {
+                    total += parseFloat(value);
+                    totalSpan.text(total.toFixed(2));
+                }
+            });
+
+            $('.filling').on('click',function () {
+                fillingCount++;
+                var fillingType = $(this).attr('data-filling-type');
+                var fillingName = fillingCount === 1 ? fillingType : ', ' + fillingType;
+                fillingDiv.append(fillingName);
+
+                var value = $(this).attr('data-filling-value');
+
+                if (value && breadCount > 0 && fillingCount - breadCount >= breadCount) {
+                    total += parseFloat(value);
+                    totalSpan.text(total.toFixed(2));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
 
