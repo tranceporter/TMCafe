@@ -367,6 +367,7 @@
             var totalSpan = $('#total');
 
             $('.filling').hide();
+            $('#placeOrder').hide();
 
             $('.bread').click(function () {
                 breadCount++;
@@ -374,6 +375,8 @@
                 var breadName = breadCount === 1 ? breadType : ', ' + breadType;
                 breadDiv.append(breadName);
                 $('.filling').show();
+                $('#placeOrder').show();
+
                 $('.bread').hide();
 
                 var value = $(this).attr('data-bread-value');
@@ -388,6 +391,7 @@
                 var fillingType = $(this).attr('data-filling-type');
                 var fillingName = fillingCount === 1 ? fillingType : ', ' + fillingType;
                 fillingDiv.append(fillingName);
+                $('#placeOrder').show();
 
                 var value = $(this).attr('data-filling-value');
 
