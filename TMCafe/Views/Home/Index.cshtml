@@ -379,7 +379,7 @@
                 var value = $(this).attr('data-bread-value');
                 if (value) {
                     total += parseFloat(value);
-                    totalSpan.text(total.toFixed(2));
+                    totalSpan.text('£' + total.toFixed(2));
                 }
             });
 
@@ -393,7 +393,7 @@
 
                 if (value && breadCount > 0 && fillingCount - breadCount >= breadCount) {
                     total += parseFloat(value);
-                    totalSpan.text(total.toFixed(2));
+                    totalSpan.text('£' + total.toFixed(2));
                 }
             });
         });
