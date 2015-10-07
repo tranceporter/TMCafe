@@ -32,10 +32,10 @@ namespace TMCafe
         private static void SetupRefreshJob()
         {
             //remove a previous job
-            Action remove = HttpContext.Current.Cache["WebApiSuiteRefresh"] as Action;
+            Action remove = HttpContext.Current.Cache["TMCafeRefresh"] as Action;
             if (remove is Action)
             {
-                HttpContext.Current.Cache.Remove("WebApiSuiteRefresh");
+                HttpContext.Current.Cache.Remove("TMCafeRefresh");
                 remove.EndInvoke(null);
             }
 
