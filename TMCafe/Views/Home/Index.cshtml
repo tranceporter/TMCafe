@@ -153,10 +153,9 @@
         }
 
     </style>
-    <h1>@User.Identity.Name</h1>
     <div class="container-fluid">
         <div class="row">
-            <img class="img-responsive" src="../../Content/Images/food-morning-breakfast-croissant.jpg" />
+            <img class="img-responsive" src="~/Content/Images/food-morning-breakfast-croissant.jpg" />
         </div>
         @*<div class="row menu">
             <div class="col-md-12 menu-header nopadding">
@@ -297,35 +296,35 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 menu-item">
-                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Tomato Sauce" />
+                        <input type="checkbox" class="pull-left menu-checkbox extra" data-extra-type="Tomato Sauce" />
                         <span class="pull-left">Tomato Sauce</span>
                         <span class="pull-right">£0.00</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 menu-item">
-                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Brown Sauce" />
+                        <input type="checkbox" class="pull-left menu-checkbox extra" data-extra-type="Brown Sauce" />
                         <span class="pull-left">Brown Sauce</span>
                         <span class="pull-right">£0.00</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 menu-item">
-                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Salt" />
+                        <input type="checkbox" class="pull-left menu-checkbox extra" data-extra-type="Salt" />
                         <span class="pull-left">Salt</span>
                         <span class="pull-right">£0.00</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 menu-item">
-                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="Black Pepper" />
+                        <input type="checkbox" class="pull-left menu-checkbox extra" data-extra-type="Black Pepper" />
                         <span class="pull-left">Black Pepper</span>
                         <span class="pull-right">£0.00</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 menu-item">
-                        <input type="checkbox" class="pull-left menu-checkbox filling" data-filling-type="No Spread" />
+                        <input type="checkbox" class="pull-left menu-checkbox extra" data-extra-type="No Spread" />
                         <span class="pull-left">No Spread</span>
                         <span class="pull-right">£0.00</span>
                     </div>
@@ -341,6 +340,10 @@
                 <div class="row">
                     <span class="order-item">Fillings: </span>
                     <span class="order-description" id="fillings"></span>
+                </div>
+                <div class="row">
+                    <span class="order-item">Extras: </span>
+                    <span class="order-description" id="extras"></span>
                 </div>
                 <div class="row">
                     <span class="order-item">Total: </span>
@@ -363,34 +366,33 @@
             var total = 0;
             var breadDiv = $('#breads');
             var fillingDiv = $('#fillings');
+            var extraDiv = $('#extras');
             var totalSpan = $('#total');
 
-            $('.filling').hide();
-            $('#placeOrder').hide();
+            toggleButtons();
 
             $('.bread').click(function () {
                 breadCount++;
+
                 var breadType = $(this).attr('data-bread-type');
                 var breadName = breadCount === 1 ? breadType : ', ' + breadType;
                 breadDiv.append(breadName);
-                $('.filling').show();
-                $('#placeOrder').show();
-
-                $('.bread').hide();
 
                 var value = $(this).attr('data-bread-value');
                 if (value) {
                     total += parseFloat(value);
                     totalSpan.text('£' + total.toFixed(2));
                 }
+
+                toggleButtons();
             });
 
             $('.filling').on('click',function () {
                 fillingCount++;
+
                 var fillingType = $(this).attr('data-filling-type');
                 var fillingName = fillingCount === 1 ? fillingType : ', ' + fillingType;
                 fillingDiv.append(fillingName);
-                $('#placeOrder').show();
 
                 var value = $(this).attr('data-filling-value');
 
@@ -398,7 +400,49 @@
                     total += parseFloat(value);
                     totalSpan.text('£' + total.toFixed(2));
                 }
+
+                toggleButtons();
             });
+
+            $('.extra').on('change', function () {
+                var count = $('.extra:checked').size();
+                var extraName = '';
+                if (count > 0) {
+                    $.each($('.extra:checked'), function () {
+                        var extraType = $(this).attr('data-extra-type');
+                        extraName += $(this).attr('data-extra-type') + ',';
+                    });
+
+                    extraName = extraName.slice(0, -1);
+                }
+
+                extraDiv.text(extraName);
+            });
+
+            $('#placeOrder').click(function () {
+                var request = {
+                    bread: breadDiv.text(),
+                    fillings: fillingDiv.text(),
+                    extras: extraDiv.text(),
+                    total: total,
+                };
+
+                $.post("@Url.Action("PlaceOrder", "Home")", request)
+                    .done(function (response) {
+                        if (response && response.success) {
+                            alert('Order placed!');
+                        }
+                    })
+                    .fail(function () {
+
+                    });
+            });
+
+            function toggleButtons() {
+                $('.bread').toggle(breadCount <= 0);
+                $('.filling').toggle(breadCount > 0);
+                $('#placeOrder').toggle(total > 0 && breadCount > 0);
+            }
         });
     </script>
 </body>
